@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Extractor CFDI Combustible</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #f5f7fa, #c3cfe2);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #1a237e;
+        }
+        input[type="file"] {
+            margin: 20px 0;
+        }
+        label {
+            margin-right: 10px;
+        }
+        #filtros {
+            margin-bottom: 20px;
+        }
+        select {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #exportBtn {
+            background-color: #1a73e8;
+            color: white;
+        }
+        #downloadHistorialBtn {
+            background-color: #43a047;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #eeeeee;
+            color: #000;
+        }
+        #tablaWrapper {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+        }
+        #historial {
+            margin-top: 20px;
+            font-size: 14px;
+            background: #f1f8e9;
+            padding: 10px;
+            border-left: 4px solid #43a047;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Extractor CFDI Combustible</h1>
+        <input type="file" id="xmlFile" accept=".xml" multiple>
+
+        <!-- Filtros -->
+        <div id="filtros">
+            <label for="mes">Mes:</label>
+            <select id="mes">
+                <option value="">Todos</option>
+                <option value="01">Enero</option>
+                <option value="02">Febrero</option>
+                <option value="03">Marzo</option>
+                <option value="04">Abril</option>
+                <option value="05">Mayo</option>
+                <option value="06">Junio</option>
+                <option value="07">Julio</option>
+                <option value="08">Agosto</option>
+                <option value="09">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+
+            <label for="anio">Año:</label>
+            <select id="anio"></select>
+
+            <button onclick="aplicarFiltro()">Filtrar</button>
+        </div>
+
+        <div id="tablaWrapper">
+            <table id="tablaConceptos">
+                <thead>
+                    <tr>
+                        <th>UUID</th>
+                        <th>Identificador</th>
+                        <th>Fecha</th>
+                        <th>RFC</th>
+                        <th>Cantidad</th>
+                        <th>Nombre Combustible</th>
+                        <th>Subtotal</th>
+                        <th>IVA</th>
+                        <th>IEPS</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="conceptosBody"></tbody>
+            </table>
+        </div>
+
+        <div id="botones"></div>
+        <div id="historial"></div>
+    </div>
+
+    <!-- Librería Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
